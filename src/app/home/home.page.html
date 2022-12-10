@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Home Page
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,9 +12,9 @@
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="container" >
+    <ion-button  [routerLink]="['/splash',data]">Splash</ion-button>
+    <ion-button (click)="routeToSplash()" >Splash</ion-button>
+    <ion-button [disabled]="true">Disabled</ion-button>
   </div>
 </ion-content>
