@@ -1,0 +1,8 @@
+@-webkit-keyframes flip-horizontal-bottom{0%{-webkit-transform:rotateX(0);transform:rotateX(0)}100%{-webkit-transform:rotateX(-180deg);transform:rotateX(-180deg)}}@keyframes flip-horizontal-bottom{0%{-webkit-transform:rotateX(0);transform:rotateX(0)}100%{-webkit-transform:rotateX(-180deg);transform:rotateX(-180deg)}}
+.splash {
+    -webkit-animation:flip-horizontal-bottom 2s cubic-bezier(.455,.03,.515,.955) alternate-reverse both;animation:flip-horizontal-bottom 2s cubic-bezier(.455,.03,.515,.955) alternate-reverse both;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

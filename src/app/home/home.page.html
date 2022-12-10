@@ -1,20 +1,80 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Home Page
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="showImg()">
+      <img alt="png" src="{{loggedInUserProfile.profilePic}}" onError="src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+  </ion-fab-button>
+</ion-fab>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div id="container" >
-    <ion-button  [routerLink]="['/splash',data]">Splash</ion-button>
-    <ion-button (click)="routeToSplash()" >Splash</ion-button>
-    <ion-button [disabled]="true">Disabled</ion-button>
+<div class="header">
+  <div class="ion-page" id="main-content">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </div>
-</ion-content>
+</div>
+<div class="content">
+  <div class="upper-container">
+    <ion-card class="name-card">
+      <ion-card-header>
+        <ion-card-title>Hey {{loggedInUserProfile.firstName}} {{loggedInUserProfile.lastName}}!</ion-card-title>
+        <ion-card-subtitle>{{greet}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Let's start educating students!
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="quote-card">
+      <ion-card-header>
+        <ion-card-title>Quote for the day</ion-card-title>
+        <ion-card-subtitle>{{today}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content >
+        "{{quote}}"
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+  <div class="lower-container">
+<ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-card class="tiles" (click)="routeToClasses()">
+              <ion-card-header class="tile-header">
+                <h1><ion-icon name="list-outline"></ion-icon></h1>
+                <ion-card-title>Classes</ion-card-title>
+              </ion-card-header>
+            </ion-card>          
+        </ion-col>
+        <ion-col>
+          <ion-card class="tiles" (click)="routeToAttendance()">
+            <ion-card-header class="tile-header">
+              <h1><ion-icon name="list-outline"></ion-icon></h1>
+              <ion-card-title>Attendance</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col >
+          <ion-card class="tiles" (click)="routeToTimeTable()">
+            <ion-card-header class="tile-header">
+              <h1><ion-icon name="list-outline"></ion-icon></h1>
+              <ion-card-title>Time Table</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card class="tiles" (click)="routeToMyAccount()">
+            <ion-card-header class="tile-header">
+              <h1><ion-icon name="list-outline"></ion-icon></h1>
+              <ion-card-title>My Account</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+  
+    </ion-grid>
+  </div>
+</div>

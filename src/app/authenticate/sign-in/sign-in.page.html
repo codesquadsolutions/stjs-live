@@ -1,0 +1,62 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="signInForm" *ngIf="signInForm" (ngSubmit)="signIn()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" placeholder="Enter your email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" placeholder="Enter Password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit">Login</ion-button>
+
+    </ion-list>
+  </form>
+</ion-content> -->
+
+
+<ion-content color="primary" >
+
+  <div class="login-page">
+    <div  class="logo-section">
+      <img src="assets/logos/logoBG.png" class="logo" />
+    </div>
+  
+    <form [formGroup]="signInForm" *ngIf="signInForm" (ngSubmit)="signIn()" class="login-section">
+   
+        <ion-text color="primary" class="login-heading ion-text-center">
+          Login
+        </ion-text>
+    
+        <ion-item>
+          <ion-label position="floating" style="color: #ffffff;">Email</ion-label>
+          <ion-input #myEmail type="email" formControlName="email"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label position="floating" style="color: #ffffff;">Password</ion-label>
+          <ion-input #myPassword type="password" formControlName="password"></ion-input>
+        </ion-item>
+    
+        <!-- <ion-text class="ion-text-end"><a>Forgot password?</a></ion-text> -->
+    
+        <ion-button color="primary" [disabled]="!signInForm.value.email || !signInForm.value.password" type="submit">Login</ion-button>
+    
+      <!-- <ion-text color="tertiary" class="ion-text-center">Don't have an account? <a>Contact Admin</a></ion-text> -->
+  
+    
+  </form>
+  </div>
+
+  
+</ion-content>
