@@ -4,11 +4,24 @@
   </ion-fab-button>
 </ion-fab>
 
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div id="container" >
+    <ion-button  [routerLink]="['/splash',data]">Splash</ion-button>
+    <ion-button (click)="routeToSplash()" >Splash</ion-button>
+    <ion-button [disabled]="true">Disabled</ion-button>
+
 <div class="header">
   <div class="ion-page" id="main-content">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+
   </div>
 </div>
 <div class="content">
