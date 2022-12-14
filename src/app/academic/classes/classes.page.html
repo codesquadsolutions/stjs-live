@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/batches']" routerLinkActive="active">
+        <ion-icon name="return-up-back-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="!isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!isSearch">Classes of {{year}}</ion-title>
+    <ion-searchbar search-icon="search" show-clear-button="never" *ngIf="isSearch" [debounce]="1000"
+      (ionChange)="handleChange($event)" [(ngModel)]="searchString"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="inset" insert="true">
+    <ion-item>
+      <ion-label>
+        <div class="classItem">
+          <div>
+            Class
+          </div>
+          <div>
+            Class Teacher
+          </div>
+          <div>
+            Strength
+          </div>
+        </div>
+      </ion-label>
+
+    </ion-item>
+
+    <ion-item *ngFor="let item of allClasses" [routerLink]="['/students',batchKey, item.key]" routerLinkActive="active">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" class="ion-text-center">
+            {{item.className}} {{item.section}}
+          </ion-col>
+          <ion-col size="6" class="ion-text-center">
+            {{item.classTeacher}}
+          </ion-col>
+          <ion-col size="3" class="ion-text-center">
+            {{item.count}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
+  <span *ngIf="currentUser.isPrincipal">
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button id="open-modal2">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-modal #modal trigger="open-modal2">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-title>Create New Class</ion-title>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel()">Cancel</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button [disabled]="!this.className || !section || !classTeacher" (click)="confirm()">Save
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+
+          <ion-item>
+            <ion-label position="stacked">Class</ion-label>
+            <ion-input #principalName type="number" min="1" max="10" color="primary" [(ngModel)]="className"
+              placeHolder="Enter Class">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Section</ion-label>
+            <ion-select [(ngModel)]="section">
+              <ion-select-option value="A">A</ion-select-option>
+              <ion-select-option value="B">B</ion-select-option>
+              <ion-select-option value="C">C</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Class Teacher</ion-label>
+            <ion-select [(ngModel)]="classTeacher">
+              <ion-select-option *ngFor="let staff of staffs | keyvalue" [value]="staff.key">{{staff.value.firstName}}
+                {{staff.value.lastName}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </span>
+</ion-content>

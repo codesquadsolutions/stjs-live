@@ -1,0 +1,91 @@
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/teacher-allocation',batchKey]" routerLinkActive="active">
+        <ion-icon name="return-up-back-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="secondary" *ngIf="editValue">
+      <ion-button (click)="disableEdit()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary" *ngIf="isClassTeacher || currentUser.isPrincipal">
+      <ion-button id="allocation-view-popover-button">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Teacher Allocation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-popover *ngIf="isClassTeacher || currentUser.isPrincipal" trigger="allocation-view-popover-button" [dismissOnSelect]="true">
+  <ng-template>
+    <ion-content>
+      <ion-list>
+        <ion-item [button]="true" [detail]="false" (click)="enableEdit()">Edit</ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>
+
+
+
+<ion-content>
+  <form [formGroup]="allocationForm" *ngIf="allocationForm" (ngSubmit)="updateAllocationForm()">
+    <ion-card>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Kannada</ion-label>
+            <ion-select  formControlName="kannada">
+              <ion-select-option *ngFor="let staff of staffs | keyvalue" [value]="staff.key">{{ staff.value.firstName }} {{ staff.value.lastName }}</ion-select-option>
+            </ion-select>
+
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">English</ion-label>
+            <ion-select  formControlName="english">
+              <ion-select-option *ngFor="let staff of staffs | keyvalue" [value]="staff.key">{{ staff.value.firstName }} {{ staff.value.lastName }}</ion-select-option>
+            </ion-select>
+
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Mathematics</ion-label>
+            <ion-select  formControlName="mathematics">
+              <ion-select-option *ngFor="let staff of staffs | keyvalue" [value]="staff.key">{{ staff.value.firstName }} {{ staff.value.lastName }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Science</ion-label>
+            <ion-select  formControlName="science">
+              <ion-select-option *ngFor="let staff of staffs | keyvalue" [value]="staff.key">{{ staff.value.firstName }} {{ staff.value.lastName }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Social Science</ion-label>
+            <ion-select  formControlName="socialScience">
+              <ion-select-option *ngFor="let staff of staffs | keyvalue" [value]="staff.key">{{ staff.value.firstName }} {{ staff.value.lastName }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Hindi</ion-label>
+            <ion-select formControlName="hindi">
+              <ion-select-option *ngFor="let staff of staffs | keyvalue" [value]="staff.key">{{ staff.value.firstName }} {{ staff.value.lastName }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+
+    </ion-card>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="editValue">
+      <ion-fab-button>
+        <ion-button type="submit">Save</ion-button>
+      </ion-fab-button>
+    </ion-fab>
+  </form>
+
+</ion-content>

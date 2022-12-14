@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/home']" routerLinkActive="active">
+        <ion-icon name="return-up-back-outline" >
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="!isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!isSearch">Teacher Allocation</ion-title>
+    <ion-searchbar search-icon="search" show-clear-button="never" *ngIf="isSearch" [debounce]="1000" (ionChange)="handleChange($event)"
+      [(ngModel)]="searchString"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="inset" insert="true">
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" class="ion-text-center">
+            Class
+          </ion-col>
+          <ion-col size="8" class="ion-text-center">
+            Class Teacher
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    </ion-item>
+
+    <ion-item *ngFor="let item of allClasses" [routerLink]="['/teacher-allocation-view', batchKey, item.key]"
+    routerLinkActive="active">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" class="ion-text-center">
+            {{item.className}} {{item.section}}
+          </ion-col>
+          <ion-col size="8" class="ion-text-center">
+            {{item.classTeacher}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

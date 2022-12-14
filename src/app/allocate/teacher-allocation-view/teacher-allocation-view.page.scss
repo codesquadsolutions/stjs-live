@@ -1,0 +1,21 @@
+.profile-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+
+ion-list{
+    border-radius: 20px;
+}
+
+ion-fab{
+    z-index: 1;
+}
+
+.item-interactive-disabled:not(.item-multiple-inputs) .sc-ion-label-md-h {
+    opacity: 1 !important;
+}
+
+.select-disabled {
+    opacity: 1 !important;
+}

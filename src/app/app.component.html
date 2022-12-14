@@ -1,3 +1,75 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <ion-menu contentId="main-content" type="overlay">
+
+      <ion-toolbar>
+        <ion-card color="primary" class="name-card" >
+          <ion-card-header >
+            <ion-card-title >Hey !</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-toolbar>
+    
+
+    <ion-content>
+      <ion-list>
+        <ion-list-header>
+          Menu
+        </ion-list-header>
+        <ion-menu-toggle [autoHide]="false">
+          <ion-item button>
+            <ion-icon slot="start" name='home'></ion-icon>
+            <ion-label>
+              Home
+            </ion-label>
+          </ion-item>
+          <ion-item button routerLink="batches" routerLinkActivate="selected">
+            <ion-icon slot="start" name='albums-outline'></ion-icon>
+            <ion-label>
+              Batches
+            </ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/classes',currentBatchKey]" routerLinkActivate="selected">
+            <ion-icon slot="start" name='school-outline'></ion-icon>
+            <ion-label>
+              Classes
+            </ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/staff','Teacher']" routerLinkActivate="selected">
+            <ion-icon slot="start" name='people-outline'></ion-icon>
+            <ion-label>
+              Teaching Staff
+            </ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/staff','Staff']" routerLinkActivate="selected">
+            <ion-icon slot="start" name='people-circle-outline'></ion-icon>
+            <ion-label>
+              Non Teaching Staff
+            </ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/teacher-allocation',currentBatchKey]" routerLinkActivate="selected">
+            <ion-icon slot="start" name='library-outline'></ion-icon>
+            <ion-label>
+              Teacher Allocation
+            </ion-label>
+          </ion-item>
+          <ion-item button (click)="showInfoAlert()">
+            <ion-icon slot="start" name='calendar-outline'></ion-icon>
+            <ion-label>
+              Time Table
+            </ion-label>
+          </ion-item>
+          <ion-item button (click)="showInfoAlert()">
+            <ion-icon slot="start" name='newspaper-outline' ></ion-icon>
+            <ion-label>
+              Subjects
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

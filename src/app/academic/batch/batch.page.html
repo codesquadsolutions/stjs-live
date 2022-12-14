@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/home']" routerLinkActive="active">
+        <ion-icon name="return-up-back-outline">
+        </ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="!isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!isSearch">Batches</ion-title>
+    <ion-searchbar search-icon="search" show-clear-button="never" *ngIf="isSearch" [debounce]="1000"
+      (ionChange)="handleChange($event)" [(ngModel)]="searchString">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="my-ion-page">
+
+  <ion-list *ngIf="batches">
+    <ion-item *ngFor="let item of batches" [routerLink]="['/classes', item.key]" routerLinkActive="active">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{item.year}}</ion-card-title>
+          <ion-card-subtitle>{{item.principal}}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="dates">
+            <div>
+              Start : {{item.startDate}}
+            </div>
+            <div>
+              End : {{item.endDate}}
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <span *ngIf="currentUser.isPrincipal">
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button id="open-modal1">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-modal #modal trigger="open-modal1" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-title>Create New Batch</ion-title>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel()">Cancel</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button [disabled]="!year || !startDate || !endDate || !principal" (click)="confirm()">Save
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+
+          <ion-item>
+            <ion-label position="stacked">Principal Name</ion-label>
+            <ion-input #principalName type="text" color="primary" [(ngModel)]="principal"
+              placeHolder="Enter Principal Name">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Year</ion-label>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime [showDefaultButtons]="true" #selectedYear id="datetime"
+                  (ionChange)="getDateInfo(selectedYear.value,'year')" presentation="year"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Start Date</ion-label>
+            <ion-datetime-button datetime="startDate"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime color="primary" [showDefaultButtons]="true" date-target="DD-MM-YYYY" #selectedStartDate
+                  id="startDate" (ionChange)="getDateInfo(selectedStartDate.value,'start')" presentation="date"
+                  [isDateEnabled]="isWeekday">
+                  <span slot="title">Select a Starting Date</span>
+                </ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">End Date</ion-label>
+            <ion-datetime-button datetime="endDate"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime [showDefaultButtons]="true" date-target="DD-MM-YYYY" #selectedEndDate id="endDate"
+                  (ionChange)="getDateInfo(selectedEndDate.value,'end')" presentation="date"
+                  [isDateEnabled]="isWeekday">
+                  <span slot="title">Select a Ending Date</span>
+                </ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+  </span>
+
+</ion-content>

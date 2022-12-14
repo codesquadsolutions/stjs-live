@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/home']" routerLinkActive="active">
+        <ion-icon name="return-up-back-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="!isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!isSearch">{{pageTitle}}</ion-title>
+    <ion-searchbar search-icon="search" show-clear-button="never" *ngIf="isSearch" [debounce]="1000"
+      (ionChange)="handleChange($event)" [(ngModel)]="searchString"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of staffs" [routerLink]="['/staff-detail',item.key]">
+          <ion-avatar slot="start">
+            <img alt="png" src="{{item.profilePic}}" onError="src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+          </ion-avatar>
+          <ion-label>{{item.firstName}} {{item.lastName}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,23 @@
+.profile-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.profile-image > img{
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+ion-list{
+    border-radius: 20px;
+}
+
+ion-fab{
+    z-index: 1;
+}

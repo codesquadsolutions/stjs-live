@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/classes', batchKey]">
+        <ion-icon name="return-up-back-outline">
+        </ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="!isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isSearch" (click)="makeIsSearchable()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!isSearch">Students</ion-title>
+    <ion-searchbar search-icon="search" show-clear-button="never" *ngIf="isSearch" [debounce]="1000"
+      (ionChange)="handleChange($event)" [(ngModel)]="searchString"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Students of class "{{className}}"</ion-card-title>
+      <ion-card-subtitle>Total Strength : {{studentList.length}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of studentList" [routerLink]="['/student-detail',batchKey,classId,item.key]">
+          <ion-avatar slot="start">
+            <img alt="png" src="{{item.profilePic}}" onError="src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+          </ion-avatar>
+          <ion-label>{{item.name}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <!-- <span *ngIf="isClassTeacher || currentUser.isPrincipal">
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button id="open-modal2">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-modal #modal trigger="open-modal2">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-title>Create New Student</ion-title>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel()">Cancel</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button [disabled]="!firstName || !lastName || !dateOfBirth || !gender 
+                          || !phoneNumber || !bloodGroup || !password 
+                          || !presentAddress || !permanentAddress || !aadhaarNumber" 
+                          (click)="confirm()">
+                Create
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <ion-item>
+            <ion-label position="stacked">User Id</ion-label>
+            <ion-input color="primary" type="email" placeholder="example@stcs.com" [(ngModel)]="email">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Password</ion-label>
+            <ion-input color="primary" type="password" placeholder="Enter Password" [(ngModel)]="password">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">First Name</ion-label>
+            <ion-input type="text" placeholder="Enter student first name" color="primary" 
+              [(ngModel)]="firstName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Last Name</ion-label>
+            <ion-input type="text" placeholder="Enter student last name" color="primary" 
+              [(ngModel)]="lastName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Date of Birth</ion-label>
+            <ion-input type="date" [(ngModel)]="dateOfBirth" color="primary" >
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Gender</ion-label>
+            <ion-select color="primary" interface="action-sheet" [(ngModel)]="gender" placeholder="Select Gender">
+              <ion-select-option value="Male">Male</ion-select-option>
+              <ion-select-option value="Female">Female</ion-select-option>
+              <ion-select-option value="Others">Others</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Phone Number</ion-label>
+            <ion-input type="number" color="primary" placeholder="10 digit mobile number" [(ngModel)]="phoneNumber"
+              ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Blood Group</ion-label>
+            <ion-select color="primary" interface="action-sheet" [(ngModel)]="bloodGroup" placeholder="Select Blood Group">
+              <ion-select-option value="O+">O+</ion-select-option>
+              <ion-select-option value="O-">O-</ion-select-option>
+              <ion-select-option value="A+">A+</ion-select-option>
+              <ion-select-option value="A-">A-</ion-select-option>
+              <ion-select-option value="B+">B+</ion-select-option>
+              <ion-select-option value="B-">B-</ion-select-option>
+              <ion-select-option value="AB+">AB+</ion-select-option>
+              <ion-select-option value="AB-">AB-</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Present Address</ion-label>
+            <ion-input color="primary" placeholder="Enter Place Name" [(ngModel)]="presentAddress"
+              ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Permanent Address</ion-label>
+            <ion-input color="primary" placeholder="Enter Place Name" [(ngModel)]="permanentAddress"
+              ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Aadhaar Number</ion-label>
+            <ion-input type="number" color="primary" placeholder="12 digit Aadhaar Number" [(ngModel)]="aadhaarNumber"
+              ></ion-input>
+          </ion-item>
+
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </span> -->
+
+
+
+
+</ion-content>
