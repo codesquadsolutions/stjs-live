@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/home']" routerLinkActive="active">
+        <ion-icon name="return-up-back-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>My Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+  <div class="profile-page">
+    <div class="top-section">
+      <ion-avatar>
+        <ion-img src="{{currentUser.profilePic}}"></ion-img>
+      </ion-avatar>
+      <ion-text class="ion-text-center top-text-first">{{currentUser.firstName}} {{currentUser.lastName}}</ion-text>
+      <ion-text class="ion-text-center top-text-second">{{ role }} ({{loggedInUserClass}})</ion-text>
+    </div>
+    <div class="bottom-section">
+      <ion-grid class="detail-grid ion-no-margin">
+        <ion-row>
+          <ion-col>
+            <a expand="block" class="btn" routerLink="/my-profile"
+              style="text-align: start; width:100%;--background: transparent; --color:#181829;text-decoration:none;">
+              <span>View My Profile</span>
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </a>
+          </ion-col>
+        </ion-row>
+
+        <hr color="primary">
+        <ion-row>
+          <ion-col>
+            <a expand="block" class="btn" (click)="showInfoAlert()"
+              style="text-align: start; width:100%;--background: transparent; --color:#181829;">
+              <span>Settings and Privacy</span>
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </a>
+          </ion-col>
+        </ion-row>
+
+        <hr color="primary">
+        <ion-row>
+          <ion-col>
+            <a expand="block" class="btn" (click)="showInfoAlert()"
+              style="text-align: start; width:100%;--background: transparent; --color:#181829;">
+              <span>Help</span>
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </a>
+
+          </ion-col>
+        </ion-row>
+
+        <hr color="primary">
+        <div class="logout-section">
+          <ion-button color="primary" (click)="userSignOut()">Logout</ion-button>
+        </div>
+
+      </ion-grid>
+    </div>
+  </div>
+
+</ion-content>

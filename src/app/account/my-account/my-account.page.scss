@@ -1,0 +1,60 @@
+.profile-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.top-section{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.bottom-section{
+    background:#ffffff;
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-top-right-radius: 25px;
+    border-top-right-radius: 25px;
+    padding: 10px;
+}
+
+ion-avatar{
+    width: 50%;
+    height: 75%;
+}
+
+.top-text-first{
+    font-family: 'Poppins', sans-serif;
+    font-size: larger;
+}
+
+.top-text-second{
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+}
+
+.detail-grid{
+    margin-top: 30px;
+}
+
+ion-col{
+    font-size: larger;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logout-section{
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    display: flex;
+    justify-content: space-between;
+}

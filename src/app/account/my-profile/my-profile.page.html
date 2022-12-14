@@ -1,0 +1,143 @@
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/my-account']" routerLinkActive="active">
+        <ion-icon name="return-up-back-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="secondary" *ngIf="!editValue">
+      <ion-button (click)="toggleEdit()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button id="my-profile-popover-button">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>My Profile Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-popover trigger="my-profile-popover-button" [dismissOnSelect]="true">
+  <ng-template>
+    <ion-content>
+      <ion-list>
+        <ion-item [button]="true" [detail]="false" (click)="toggleEdit()">Edit</ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>
+
+
+
+<ion-content>
+  <form [formGroup]="updateForm" *ngIf="updateForm" (ngSubmit)="save()">
+    <ion-card>
+      <div class="profile-image">
+        <img [src]="imgSrc" (click)="fileUploader" height="120" width="120" class="ion-text-center"
+          alt="Profile Picture" />
+      </div>
+
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-input *ngIf="!editValue" accept="image/png,image/jpg,image/jpeg" type="file" accept="image/*"
+              class="form-control" #fileUploader formControlName="profilePic" (change)="showPreview($event)">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">First Name</ion-label>
+            <ion-input type="text" color="primary" [readonly]="editValue" formControlName="firstName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Last Name</ion-label>
+            <ion-input type="text" color="primary" [readonly]="editValue" formControlName="lastName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Date of Birth</ion-label>
+            <ion-input type="date" formControlName="dateOfBirth" color="primary" [readonly]="editValue">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Gender</ion-label>
+            <ion-select interface="action-sheet"  formControlName="gender"
+              placeholder="Select Gender">
+              <ion-select-option value="Male">Male</ion-select-option>
+              <ion-select-option value="Female">Female</ion-select-option>
+              <ion-select-option value="Others">Others</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Phone Number</ion-label>
+            <ion-input color="primary" formControlName="phoneNumber" [readonly]="editValue"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input color="primary" formControlName="email" [readonly]="editValue">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Blood Group</ion-label>
+            <ion-select interface="action-sheet" formControlName="bloodGroup"
+              placeholder="Select Blood Group">
+              <ion-select-option value="O+">O+</ion-select-option>
+              <ion-select-option value="O-">O-</ion-select-option>
+              <ion-select-option value="A+">A+</ion-select-option>
+              <ion-select-option value="A-">A-</ion-select-option>
+              <ion-select-option value="B+">B+</ion-select-option>
+              <ion-select-option value="B-">B-</ion-select-option>
+              <ion-select-option value="AB+">AB+</ion-select-option>
+              <ion-select-option value="AB-">AB-</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Joining Date</ion-label>
+            <ion-input type="date" formControlName="joiningDate" color="primary" [readonly]="editValue">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Present Address</ion-label>
+            <ion-input color="primary" formControlName="presentAddress" [readonly]="editValue"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Permanent Address</ion-label>
+            <ion-input color="primary" formControlName="permanentAddress" [readonly]="editValue"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Aadhaar Number</ion-label>
+            <ion-input color="primary" formControlName="aadhaarNumber" [readonly]="editValue"></ion-input>
+          </ion-item>
+
+          <ion-item hidden>
+            <ion-label position="stacked">Role</ion-label>
+            <ion-input color="primary" formControlName="role"></ion-input>
+          </ion-item>
+
+          <ion-item hidden>
+            <ion-label position="stacked">isActive</ion-label>
+            <ion-input color="primary" formControlName="isActive"></ion-input>
+          </ion-item>
+
+          <ion-item hidden>
+            <ion-label position="stacked">isPrincipal</ion-label>
+            <ion-input color="primary" formControlName="isPrincipal"></ion-input>
+          </ion-item>
+
+        </ion-list>
+      </ion-card-content>
+
+    </ion-card>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!editValue">
+      <ion-fab-button>
+        <ion-button type="submit">Save</ion-button>
+      </ion-fab-button>
+    </ion-fab>
+  </form>
+
+</ion-content>
